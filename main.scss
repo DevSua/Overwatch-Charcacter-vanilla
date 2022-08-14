@@ -1,0 +1,62 @@
+$url: "https://raw.githubusercontent.com/ParkYoungWoong/overwatch-hero-selector-vanilla/master/images";
+
+body {
+  height: 100vh;
+  background-image: url("#{$url}/bg.jpg");
+  background-size: cover; /*더넓은 사이즈에맞게 출력*/
+  background-repeat: no-repeat;
+  background-attachment: fixed; /*배경이미지 고정*/
+}
+
+.container {
+  padding: 50px 0;
+  .heroes {
+    display: flex;
+    flex-wrap: wrap; /*줄바꿈해줘~*/
+    justify-content: center; /*주축을 기준으로 센터*/
+    max-width: 700px;
+    margin: auto;
+    padding: 40px 20px;
+    .hero {
+      width: 80px;
+      height: 84px;
+      margin: 4px;
+      border: 3px solid #fff;
+      border-radius: 10px;
+      box-sizing: border-box; /*border로인해 사이즈가 줄어드는데 사이즈 고정*/
+      background-color: #555;
+      overflow: hidden; /*사이즈가안맞는부분은 잘라낼게*/
+      transform: skewX(-14deg); /*-14도만큼 비틀어주기*/
+      transition: transform 0.1s, /*커지는거는 0.1초*/ background-color 0.6s;
+      /*배경색은 천천히 바뀜*/
+      &:hover {
+        background-color: #ff9c00;
+        transform: skewX(-14deg) scale(1.3);
+        z-index: 1; /*쌓임순서 젤 위로*/
+      }
+      .image {
+        width: 140%;
+        height: 100%;
+        background-position: center;
+        background-repeat: no-repeat;
+        background-size: 90px;
+        transform: skewX(14deg) translateX(-16px);
+      }
+      @for $i from 1 through 32 {
+        //.hero
+        &:nth-child(#{$i}) .image {
+          background-image: url("#{$url}/hero#{$i}.png");
+        }
+      }
+    }
+  }
+  .logo {
+    max-width: 300px; /*div logo의 최대 가로넓이*/
+    margin: 0 auto; /*불럭요소,가로넓이존재. 위아래는0 좌우에다가 브라우저가 알아서 계산하게 auto */
+    padding: 0 20px;
+    img {
+      /*부모인 300px보다는 커질수없음. logo의 최대넓이에 맞춤*/
+      width: 100%;
+    }
+  }
+}
